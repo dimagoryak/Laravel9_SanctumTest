@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\API\Auth\AuthController;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
+
 Route::name('api.')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('register', [AuthController::class, 'register'])->name('auth.create');
 
     Route::middleware('auth:sanctum')->group(function () {
+        //Route::get('user', [AuthController::class, 'getUser'])->name('auth.user');
         Route::post('refresh', [AuthController::class, 'refresh'])->name('auth.refresh');
         Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
+        Route::post('send', [App\Http\Controllers\API\MessageController::class, 'sendMessage'])->name('user.send');
     });
 });

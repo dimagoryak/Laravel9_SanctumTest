@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -109,5 +109,13 @@ class AuthController extends Controller
                 'access_token' => $user->tokens()->first()->created_at ?? now()
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @return User|null
+     */
+    public function getUser(Request $request){
+        return $request->user() ?? null;
     }
 }

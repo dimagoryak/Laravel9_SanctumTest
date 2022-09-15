@@ -1,0 +1,1 @@
+{{--An empty blade file--}}

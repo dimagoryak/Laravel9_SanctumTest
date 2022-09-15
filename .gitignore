@@ -41,3 +41,5 @@ Thumbs.db
 /public/sitemap.xml
 /public/robots.txt
 
+/laravel-echo-server.lock
+/laravel-echo-server.json
